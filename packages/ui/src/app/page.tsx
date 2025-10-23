@@ -6,22 +6,33 @@ import { compileIcon, compiledIconToSVG } from '@icon-builder/compiler';
 import type { CompiledIcon } from '@icon-builder/compiler';
 
 export default function Home() {
-  // Create a default DNA profile
-  const dna = createDNA('default', 'Default', {
-    gridSize: 1,
-    viewBoxSize: 24,
-    liveAreaInset: 2,
-    strokeWidth: 1.5,
-    allowedRadii: [0, 2, 4],
-    allowedAngles: [0, 45, 90],
-  });
-
   // State
   const [selectedArchetype, setSelectedArchetype] = useState('home');
   const [style, setStyle] = useState<'outline' | 'filled'>('outline');
   const [compiledIcon, setCompiledIcon] = useState<CompiledIcon | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [parameters, setParameters] = useState<Record<string, number | boolean>>({});
+
+  // DNA controls state
+  const [dnaStrokeWidth, setDnaStrokeWidth] = useState(1.5);
+  const [dnaStrokeLineCap, setDnaStrokeLineCap] = useState<'butt' | 'round' | 'square'>('round');
+  const [dnaStrokeLineJoin, setDnaStrokeLineJoin] = useState<'miter' | 'round' | 'bevel'>('round');
+  const [dnaColorMode, setDnaColorMode] = useState<'currentColor' | 'fixed'>('currentColor');
+  const [dnaPrimaryColor, setDnaPrimaryColor] = useState('#000000');
+
+  // Create dynamic DNA profile based on controls
+  const dna = createDNA('default', 'Default', {
+    gridSize: 1,
+    viewBoxSize: 24,
+    liveAreaInset: 2,
+    strokeWidth: dnaStrokeWidth,
+    strokeLineCap: dnaStrokeLineCap,
+    strokeLineJoin: dnaStrokeLineJoin,
+    allowedRadii: [0, 2, 4],
+    allowedAngles: [0, 45, 90],
+    colorMode: dnaColorMode,
+    primaryColor: dnaColorMode === 'fixed' ? dnaPrimaryColor : undefined,
+  });
 
   // Get current archetype
   const archetype = ARCHETYPES[selectedArchetype];
@@ -139,6 +150,114 @@ export default function Home() {
                         </p>
                       </div>
                     ))}
+                  </div>
+
+                  {/* DNA Controls */}
+                  <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
+                    <h3 className="font-semibold mb-4 text-slate-900 dark:text-white">
+                      Icon DNA Properties
+                    </h3>
+                    <div className="space-y-4">
+                      {/* Stroke Width */}
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                          Stroke Width (px)
+                        </label>
+                        <div className="flex gap-2 items-center">
+                          <input
+                            type="range"
+                            min="0.5"
+                            max="3"
+                            step="0.25"
+                            value={dnaStrokeWidth}
+                            onChange={(e) => setDnaStrokeWidth(parseFloat(e.target.value))}
+                            className="flex-1"
+                          />
+                          <span className="text-sm font-mono w-10 text-right text-slate-600 dark:text-slate-400">
+                            {dnaStrokeWidth.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Line Cap */}
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                          Line Cap
+                        </label>
+                        <div className="flex gap-2">
+                          {(['butt', 'round', 'square'] as const).map((cap) => (
+                            <button
+                              key={cap}
+                              onClick={() => setDnaStrokeLineCap(cap)}
+                              className={`flex-1 py-1 rounded text-xs font-medium transition-colors ${
+                                dnaStrokeLineCap === cap
+                                  ? 'bg-blue-500 text-white'
+                                  : 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white'
+                              }`}
+                            >
+                              {cap.charAt(0).toUpperCase() + cap.slice(1)}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Line Join */}
+                      <div>
+                        <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                          Line Join
+                        </label>
+                        <div className="flex gap-2">
+                          {(['miter', 'round', 'bevel'] as const).map((join) => (
+                            <button
+                              key={join}
+                              onClick={() => setDnaStrokeLineJoin(join)}
+                              className={`flex-1 py-1 rounded text-xs font-medium transition-colors ${
+                                dnaStrokeLineJoin === join
+                                  ? 'bg-blue-500 text-white'
+                                  : 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white'
+                              }`}
+                            >
+                              {join.charAt(0).toUpperCase() + join.slice(1)}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Color Mode */}
+                      <div>
+                        <label className="block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300">
+                          Color Mode
+                        </label>
+                        <div className="flex gap-2 mb-2">
+                          {(['currentColor', 'fixed'] as const).map((mode) => (
+                            <button
+                              key={mode}
+                              onClick={() => setDnaColorMode(mode)}
+                              className={`flex-1 py-1 rounded text-xs font-medium transition-colors ${
+                                dnaColorMode === mode
+                                  ? 'bg-blue-500 text-white'
+                                  : 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white'
+                              }`}
+                            >
+                              {mode === 'currentColor' ? 'Current Color' : 'Fixed Color'}
+                            </button>
+                          ))}
+                        </div>
+                        {dnaColorMode === 'fixed' && (
+                          <div className="flex gap-2 items-center">
+                            <input
+                              type="color"
+                              value={dnaPrimaryColor}
+                              onChange={(e) => setDnaPrimaryColor(e.target.value)}
+                              className="w-10 h-8 rounded cursor-pointer"
+                            />
+                            <span className="text-sm font-mono text-slate-600 dark:text-slate-400">
+                              {dnaPrimaryColor}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Style Selection */}
