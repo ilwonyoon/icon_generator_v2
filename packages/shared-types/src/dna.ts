@@ -181,7 +181,7 @@ export function validateDNA(dna: unknown): asserts dna is IconDNA {
     throw new Error('DNA.minimumGap must be a non-negative number');
   }
 
-  if (typeof d.minimumFeatureSize !== 'number' || d.minimumFeatureSize > 0) {
+  if (typeof d.minimumFeatureSize !== 'number' || d.minimumFeatureSize <= 0) {
     throw new Error('DNA.minimumFeatureSize must be a positive number');
   }
 

@@ -7,7 +7,8 @@
  * - Spacing enforcement (minimum gaps between features)
  */
 
-import type { IconDNA, Point } from '@icon-builder/shared-types';
+import type { IconDNA } from '@icon-builder/shared-types';
+import type { Point } from '../types';
 
 /**
  * Snap a coordinate to the nearest grid point

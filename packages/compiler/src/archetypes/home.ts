@@ -5,9 +5,8 @@
  */
 
 import type { IconDNA } from '@icon-builder/shared-types';
-import { SVGPathBuilder, createRectPath, createTrianglePath } from '../utils/svg-path';
-import { snapToGrid, quantizeRadius } from '../utils/constraint-solver';
-import type { SVGPath, CompiledIcon } from '../types';
+import { createRectPath, createTrianglePath } from '../utils/svg-path';
+import type { SVGPath } from '../types';
 
 interface HomeParams {
   roofHeight: number;

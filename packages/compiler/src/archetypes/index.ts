@@ -26,13 +26,13 @@ export type ArchetypeCompiler = (
 export const ARCHETYPE_COMPILERS: Record<string, ArchetypeCompiler> = {
   home: (params, dna, style) =>
     compileHomeIcon(
-      params as Parameters<typeof compileHomeIcon>[0],
+      params as unknown as Parameters<typeof compileHomeIcon>[0],
       dna,
       style
     ),
   search: (params, dna, style) =>
     compileSearchIcon(
-      params as Parameters<typeof compileSearchIcon>[0],
+      params as unknown as Parameters<typeof compileSearchIcon>[0],
       dna,
       style
     ),

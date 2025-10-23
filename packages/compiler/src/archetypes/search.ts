@@ -5,7 +5,7 @@
  */
 
 import type { IconDNA } from '@icon-builder/shared-types';
-import { SVGPathBuilder, createCirclePath, createLinePath } from '../utils/svg-path';
+import { createCirclePath, createLinePath } from '../utils/svg-path';
 import type { SVGPath } from '../types';
 
 interface SearchParams {
@@ -23,7 +23,7 @@ export function compileSearchIcon(
   style: 'outline' | 'filled' = 'outline'
 ): SVGPath[] {
   const { lensRadius, handleLength, handleAngle } = params;
-  const { viewBoxSize, strokeWidth, liveAreaInset } = dna;
+  const { viewBoxSize, strokeWidth } = dna;
 
   const center = viewBoxSize / 2;
   const lensX = center - lensRadius * 0.3;

@@ -6,14 +6,15 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "turbo run dev --parallel",
-    "build": "turbo run build",
-    "test": "turbo run test",
-    "test:watch": "turbo run test:watch",
-    "lint": "turbo run lint",
-    "format": "turbo run format",
-    "format:check": "turbo run format:check",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "dev": "pnpm -r --parallel --include-dependencies run dev",
+    "dev:ui": "pnpm -C packages/ui dev",
+    "build": "pnpm -r --parallel --include-dependencies run build",
+    "test": "pnpm -r run test",
+    "test:watch": "pnpm -r run test:watch",
+    "lint": "pnpm -r run lint",
+    "format": "pnpm -r run format",
+    "format:check": "pnpm -r run format:check",
+    "clean": "pnpm -r run clean && rm -rf node_modules"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",

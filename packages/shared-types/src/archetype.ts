@@ -889,11 +889,11 @@ export function validateArchetypeParams(
       continue;
     }
 
-    if (paramDef.type === 'number' && paramDef.min !== undefined && value < paramDef.min) {
+    if (paramDef.type === 'number' && paramDef.min !== undefined && typeof value === 'number' && value < paramDef.min) {
       errors.push(`Parameter "${paramDef.id}" must be >= ${paramDef.min}`);
     }
 
-    if (paramDef.type === 'number' && paramDef.max !== undefined && value > paramDef.max) {
+    if (paramDef.type === 'number' && paramDef.max !== undefined && typeof value === 'number' && value > paramDef.max) {
       errors.push(`Parameter "${paramDef.id}" must be <= ${paramDef.max}`);
     }
   }
