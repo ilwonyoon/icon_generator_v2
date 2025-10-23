@@ -83,12 +83,12 @@ export default function Home() {
               </h2>
 
               {/* Archetype List */}
-              <div className="space-y-2 mb-6 max-h-96 overflow-y-auto">
+              <div className="grid grid-cols-3 gap-2 mb-6 max-h-96 overflow-y-auto">
                 {Object.values(ARCHETYPES).map((arch) => (
                   <button
                     key={arch.id}
                     onClick={() => handleArchetypeChange(arch.id)}
-                    className={`w-full text-left px-4 h-btn rounded-btn transition-colors font-medium ${
+                    className={`text-center px-3 py-2 rounded-btn transition-colors font-medium text-sm ${
                       selectedArchetype === arch.id
                         ? 'bg-primary text-white'
                         : 'bg-gray-100 text-black hover:bg-gray-200'
