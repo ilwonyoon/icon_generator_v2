@@ -1,0 +1,31 @@
+{
+  "name": "@icon-builder/cli",
+  "version": "0.0.0",
+  "description": "Command-line interface for Icon Builder",
+  "type": "module",
+  "bin": {
+    "icon": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@icon-builder/shared-types": "workspace:*",
+    "@icon-builder/compiler": "workspace:*",
+    "commander": "^11.1.0",
+    "chalk": "^5.3.0",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/fs-extra": "^11.0.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.1"
+  }
+}

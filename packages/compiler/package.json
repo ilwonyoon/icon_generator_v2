@@ -1,0 +1,27 @@
+{
+  "name": "@icon-builder/compiler",
+  "version": "0.0.0",
+  "description": "Core parametric icon compiler for Icon Builder",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@icon-builder/shared-types": "workspace:*",
+    "svgpath": "^2.3.1",
+    "bezier-js": "^6.1.1",
+    "polygon-clipping": "^0.15.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/bezier-js": "^0.0.15",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.1"
+  }
+}

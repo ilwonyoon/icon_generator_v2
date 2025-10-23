@@ -1,0 +1,31 @@
+{
+  "name": "@icon-builder/shared-types",
+  "version": "0.0.0",
+  "description": "Shared TypeScript types and schemas for Icon Builder",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dna": {
+      "import": "./dist/dna.js",
+      "types": "./dist/dna.d.ts"
+    },
+    "./archetype": {
+      "import": "./dist/archetype.js",
+      "types": "./dist/archetype.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  }
+}
