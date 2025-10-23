@@ -128,9 +128,23 @@ export default function Home() {
                               }}
                               className="flex-1"
                             />
-                            <span className="text-sm font-mono w-12 text-right text-gray-600">
-                              {(parameters[param.id] ?? param.default).toFixed(1)}
-                            </span>
+                            <input
+                              type="number"
+                              min={param.min}
+                              max={param.max}
+                              step={param.step || 0.5}
+                              value={(parameters[param.id] ?? param.default).toFixed(1)}
+                              onChange={(e) => {
+                                const val = parseFloat(e.target.value);
+                                if (!isNaN(val) && val >= param.min! && val <= param.max!) {
+                                  setParameters({
+                                    ...parameters,
+                                    [param.id]: val,
+                                  });
+                                }
+                              }}
+                              className="w-16 px-2 py-1 text-sm font-mono text-right border border-gray-300 rounded h-btn"
+                            />
                           </div>
                         ) : (
                           <input
@@ -173,9 +187,20 @@ export default function Home() {
                             onChange={(e) => setDnaStrokeWidth(parseFloat(e.target.value))}
                             className="flex-1"
                           />
-                          <span className="text-sm font-mono w-10 text-right text-gray-600">
-                            {dnaStrokeWidth.toFixed(2)}
-                          </span>
+                          <input
+                            type="number"
+                            min="0.5"
+                            max="3"
+                            step="0.25"
+                            value={dnaStrokeWidth.toFixed(2)}
+                            onChange={(e) => {
+                              const val = parseFloat(e.target.value);
+                              if (!isNaN(val) && val >= 0.5 && val <= 3) {
+                                setDnaStrokeWidth(val);
+                              }
+                            }}
+                            className="w-16 px-2 py-1 text-sm font-mono text-right border border-gray-300 rounded h-btn"
+                          />
                         </div>
                       </div>
 
